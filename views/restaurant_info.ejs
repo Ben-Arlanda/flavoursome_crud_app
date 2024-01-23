@@ -1,0 +1,20 @@
+<a href="/restaurants/new">Review</a>
+
+<h1><%= restaurant.name %></h1>
+
+<img src="<%= restaurant.image_url1 %>" alt="">
+<img src="<%= restaurant.image_url2 %>" alt="">
+
+<p>
+    <%= restaurant.description %>
+</p>
+<p>
+    <%= restaurant.location %>
+</p>
+
+<form action="/restaurants/<%= restaurant.id %>?_method=delete" method="post">
+
+    <button>Edit</button>
+</form>
+
+<a href="/restaurants/<%= restaurant.id %>/edit">edit planet</a>

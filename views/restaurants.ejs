@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="/restaurants.css">
+
+<% for (let restaurant of restaurants) { %>
+
+   
+
+    <h2>
+        <a href="/restaurants/<%= restaurant.id %>">
+            <%= restaurant.name %>
+        </a>
+        <p>
+            <img src="<%= restaurant.image_url1 %>" alt="">
+            <img src="<%= restaurant.image_url2 %>" alt="">
+        </p>
+        <p><%= restaurant.description %></p>
+
+        <p>Location</p>
+        <p>
+            <%= restaurant.location %>
+        </p>
+    </h2>
+    <% } %>
