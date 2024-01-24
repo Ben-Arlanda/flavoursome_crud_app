@@ -116,6 +116,22 @@ VALUES (
     'Chat Thai',
     'https://example.com/chat-thai-image1.jpg',
     'https://example.com/chat-thai-image2.jpg',
-    'Known for its authentic Thai flavors, Chat Thai is a bustling and vibrant restaurant in the heart of Sydney’s Thai Town.',
+    'Known for its authentic Thai flavors, Chat Thai is a bustling and vibrant restaurant in the heart of Sydneys Thai Town.',
     'Sydney, Haymarket'
 );
+
+
+
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    restaurantID INTEGER,
+    email TEXT,
+    description TEXT,
+    rating INTEGER
+);
+
+INSERT INTO reviews (restaurantID, email, description, rating)
+VALUES 
+  (2, 'user1@example.com', 'Good service!', 4),
+  (1, 'user2@example.com', 'Not satisfied with the food.', 2),
+  (3, 'user3@example.com', 'Excellent ambiance!', 5);

@@ -7,17 +7,23 @@ const app = express()
 const port = 8080
 const db = require('./db')
 
+//need this for user session/userId
+const session = require('express-session')
+
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(expressLayouts)
 
+// need this for body of email login 
+app.use(express.urlencoded({ extended: true}))
 
-// app.use(session({
-//   secret: process.env.SECRET,
-//   resave: false,
-//   saveUninitialized: true
-// }))
+//need this for user sessiion/userId
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true
+}))
 
 app.get('/', (req, res) => {
         res.render('landing_page')
@@ -35,10 +41,6 @@ app.get('/restaurants', (req, res) => {
     })
 })
 
-app.get('/restaurants/new', (req, res) => {
-    res.render('new_restaurant_form')
-})
-
 
 app.get('/restaurants/:id', (req, res) => {
 
@@ -46,37 +48,81 @@ app.get('/restaurants/:id', (req, res) => {
 
     db.query(`select * from restaurants where id = ${id};`, (err, result) => {
       
-    let restaurant = result.rows[0]
-    console.log(result.rows);
-    
-    res.render('restaurant_info', {restaurant: restaurant})
+        console.log(err);
+        let restaurant = result.rows[0]
+
+        db.query('SELECT * FROM reviews WHERE restaurantID = $1;', [id], (err, reviewResult) => {
+
+            let reviews = reviewResult.rows;
+            
+            console.log(result.rows);
+            
+            res.render('restaurant_info', { restaurant, reviews });
+
+        })
 
     })
-
 })
 
 
-app.post('/restaurants', (req, res) => {
+app.delete('/reviews/:id', (req, res) => {
 
-  let name = req.body.name
-  let imageUrl1 = req.body.image_url1
-  let imageUrl2 = req.body.image_url2
+    console.log('hello');
+const sql = `
+DELETE FROM reviews
+WHERE id = $1`;
+
+db.query(sql, (err, result) => {
+    if(err) {
+        console.log(err)
+    }
+
+    res.redirect(`/restaurants/${restaurantID}`);
+    })
+})
+
+app.post('/reviews/:id/reviews', (req, res) => {
+
+  let restaurantID = req.params.id
+  let email = req.body.email
   let description = req.body.description
-  let location = req.body.location
+  let rating = req.body.rating
 
-  const sql = `INSERT INTO planets (name, image_url1, image_url2, description, location) values ('${name}', '${imageUrl1}', '${imageUrl2}', '${description}''${location}');`
+
+  const sql = `INSERT INTO reviews (restaurantID, email, description, rating) values ('${restaurantID}', '${email}', '${description}', '${rating}');`
 
   db.query(sql, (err, result) => {
     if (err) {
       console.log()
     }
 
-    ///res.send('success!!!!') // we are lying to our clients
-
-    res.redirect('/restaurants')
+    res.redirect(`/restaurants/${restaurantID}`);
   })
 
 })
+
+
+
+
+app.get('/reviews/:id/edit', (req, res) => {
+
+const sql = `
+
+SELECT * FROM reviews
+WHERE id = ${req.params.id};
+`
+
+db.query(sql, (err, result) => {
+  if (err) {
+    console.log(err);
+  }
+
+  let reviews = result.rows[0]
+  res.redirect(`/restaurants/${restaurantID}`);
+ })
+})
+
+
 
 
 app.get('/login', (req, res) => {
