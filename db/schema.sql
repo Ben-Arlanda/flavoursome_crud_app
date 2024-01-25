@@ -54,8 +54,8 @@ VALUES (
 INSERT INTO restaurants (name, image_url1, image_url2, description, location)
 VALUES (
     'Bennelong',
-    'https://example.com/bennelong-image1.jpg',
-    'https://example.com/bennelong-image2.jpg',
+    'https://media-cdn.tripadvisor.com/media/photo-s/0b/f9/55/83/photo-by-brett-stevens.jpg',
+    'https://imgix.theurbanlist.com/content/article/Bennelong-Restaurant-Sydney-Opera-House.jpg',
     'Situated in the iconic Sydney Opera House, Bennelong offers modern Australian cuisine in a stylish and elegant setting.',
     'Sydney, Circular Quay'
 );
@@ -64,8 +64,8 @@ VALUES (
 INSERT INTO restaurants (name, image_url1, image_url2, description, location)
 VALUES (
     'Momofuku Seiobo',
-    'https://example.com/momofuku-image1.jpg',
-    'https://example.com/momofuku-image2.jpg',
+    'https://img.delicious.com.au/LHeGXUl3/w759-h506-cfill/del/2015/10/momofoku-seiobo-21012-2.jpg',
+    'https://media.cntraveler.com/photos/5a86f6b886e4b63c297d4860/16:9/w_2560,c_limit/Momofuko-Seiobo_Alan-Richardson_2018_pork-+-sides.jpg',
     'A part of the renowned Momofuku group, Momofuku Seiobo showcases innovative and eclectic dishes in a vibrant atmosphere.',
     'Sydney, Pyrmont'
 );
@@ -73,29 +73,9 @@ VALUES (
 
 INSERT INTO restaurants (name, image_url1, image_url2, description, location)
 VALUES (
-    'Golden Century Seafood Restaurant',
-    'https://example.com/golden-century-image1.jpg',
-    'https://example.com/golden-century-image2.jpg',
-    'Specializing in Chinese seafood, Golden Century is a popular choice for delicious and fresh seafood dishes in Sydney’s Chinatown.',
-    'Sydney, Chinatown'
-);
-
-
-INSERT INTO restaurants (name, image_url1, image_url2, description, location)
-VALUES (
-    'Bourke Street Bakery',
-    'https://example.com/bourke-street-bakery-image1.jpg',
-    'https://example.com/bourke-street-bakery-image2.jpg',
-    'Known for its artisanal bread and delectable pastries, Bourke Street Bakery is a beloved spot for baked goods and coffee.',
-    'Sydney, Surry Hills'
-);
-
-
-INSERT INTO restaurants (name, image_url1, image_url2, description, location)
-VALUES (
     'Icebergs Dining Room and Bar',
-    'https://example.com/icebergs-image1.jpg',
-    'https://example.com/icebergs-image2.jpg',
+    'https://mediaim.expedia.com/destination/2/acd20a3c83d0027ca994145e556e811a.jpg',
+    'https://cdn.broadsheet.com.au/cache/4e/e7/4ee77d0844e5fc899f14c498ff6e3f34.jpg',
     'Perched above Bondi Beach, Icebergs offers modern Italian cuisine with breathtaking ocean views.',
     'Sydney, Bondi Beach'
 );
@@ -104,8 +84,8 @@ VALUES (
 INSERT INTO restaurants (name, image_url1, image_url2, description, location)
 VALUES (
     'The Grounds of Alexandria',
-    'https://example.com/grounds-of-alexandria-image1.jpg',
-    'https://example.com/grounds-of-alexandria-image2.jpg',
+    'https://www.hiddencitysecrets.com.au/wp-content/uploads/2019/12/grounds-of-alexandria-sydney-cafe-garden-lush-best-restaurant-9.jpg',
+    'https://images.otstatic.com/prod/25055763/1/huge.jpg',
     'A popular cafe and garden, The Grounds of Alexandria serves delicious brunches and offers a unique and rustic atmosphere.',
     'Sydney, Alexandria'
 );
@@ -114,8 +94,8 @@ VALUES (
 INSERT INTO restaurants (name, image_url1, image_url2, description, location)
 VALUES (
     'Chat Thai',
-    'https://example.com/chat-thai-image1.jpg',
-    'https://example.com/chat-thai-image2.jpg',
+    'https://resizer.otstatic.com/v2/photos/wide-huge/3/57252264.jpg',
+    'https://media-cdn.tripadvisor.com/media/photo-s/19/61/79/17/som-dtum-tard-family.jpg',
     'Known for its authentic Thai flavors, Chat Thai is a bustling and vibrant restaurant in the heart of Sydneys Thai Town.',
     'Sydney, Haymarket'
 );

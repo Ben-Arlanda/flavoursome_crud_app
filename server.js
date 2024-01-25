@@ -3,6 +3,9 @@ require('dotenv').config()
 const express = require('express')
 const bcrypt = require('bcrypt')
 const expressLayouts = require('express-ejs-layouts')
+
+// 
+const methodOverride = require('method-override');
 const app = express()
 const port = 8080
 const db = require('./db')
@@ -11,9 +14,12 @@ const db = require('./db')
 const session = require('express-session')
 
 
+
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(expressLayouts)
+app.use(methodOverride('_method'))
+
 
 // need this for body of email login 
 app.use(express.urlencoded({ extended: true}))
@@ -54,10 +60,17 @@ app.get('/restaurants/:id', (req, res) => {
         db.query('SELECT * FROM reviews WHERE restaurantID = $1;', [id], (err, reviewResult) => {
 
             let reviews = reviewResult.rows;
+
+            let totalRating = 0;
+            for (const review of reviews) {
+            totalRating += review.rating;
+        }
+          const averageRating = reviews.length > 0 ? totalRating / reviews.length : 0;
             
             console.log(result.rows);
+            console.log('hi');
             
-            res.render('restaurant_info', { restaurant, reviews });
+            res.render('restaurant_info', { restaurant, reviews, averageRating });
 
         })
 
@@ -67,12 +80,14 @@ app.get('/restaurants/:id', (req, res) => {
 
 app.delete('/reviews/:id', (req, res) => {
 
-    console.log('hello');
+let restaurantID = req.body.restaurantId
+console.log(restaurantID);
+
 const sql = `
 DELETE FROM reviews
 WHERE id = $1`;
 
-db.query(sql, (err, result) => {
+db.query(sql, [req.params.id], (err, result) => {
     if(err) {
         console.log(err)
     }
@@ -103,7 +118,6 @@ app.post('/reviews/:id/reviews', (req, res) => {
 
 
 
-
 app.get('/reviews/:id/edit', (req, res) => {
 
 const sql = `
@@ -121,7 +135,6 @@ db.query(sql, (err, result) => {
   res.redirect(`/restaurants/${restaurantID}`);
  })
 })
-
 
 
 

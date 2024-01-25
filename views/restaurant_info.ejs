@@ -1,46 +1,91 @@
-<link rel="stylesheet" href="/restaurant_info.css">
+<!DOCTYPE html>
+<html lang="en">
 
-<h1><%= restaurant.name %></h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/restaurant_info.css">
+    <title>
+        <%= restaurant.name %>
+    </title>
+</head>
 
-<img src="<%= restaurant.image_url1 %>" alt="">
-<img src="<%= restaurant.image_url2 %>" alt="">
+<body>
+    <header>
+       
+        <div class="navbar">
+            <a href="/">Home</a>
+            <a href="/restaurants">Restaurants</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <h1>
+            <%= restaurant.name %>
+        </h1>
+    </header>
 
-<p>
-    <%= restaurant.description %>
-</p>
-<p>
-    <%= restaurant.location %>
-</p>
+    <div class="restaurant-info">
+        <img src="<%= restaurant.image_url1 %>" alt="Restaurant Image 1">
+        <img src="<%= restaurant.image_url2 %>" alt="Restaurant Image 2">
 
-<h2>Reviews</h2>
-    <% for (const review of reviews) { %>
-        <!-- <p><strong>Email:</strong> -->
-            <!-- <%= review.email %> -->
+        <p>
+            <%= restaurant.description %>
         </p>
-        <!-- <p><strong>Description:</strong> -->
-            <%= review.description %>
+        <p><strong>Location:</strong>
+            <%= restaurant.location %>
         </p>
-        <p><strong>Rating:</strong>
-            <%= review.rating %>
+        <p><strong>Average Rating:</strong> <%= averageRating.toFixed(2) %>
         </p>
-    <form action="/reviews/<%= review.id %>?_method=delete" method="post">
-        <button>Delete Review</button>
-    </form>
+    </div>
 
-    <% } %>
+    <div class="reviews-container">
+        <h2>Reviews</h2>
+        <% for (const review of reviews) { %>
+            <div class="review">
 
-<h2>Create a New Review</h2>
-<form action="/reviews/<%= restaurant.id %>/reviews" method="post">
-    <input type="hidden" name="" value="<%= restaurant.id %>">
-    <input type="hidden" name="email">
-    <label for="description">Description:</label>
-    <textarea id="description" name="description" rows="4" required></textarea>
+                <!-- <%= review.email %> -->
+                </p>
 
-    <label for="rating">Rating:</label>
-    <input type="number" id="rating" name="rating" min="1" max="5" required>
+                <%= review.description %>
+                    </p>
+                    <p><strong>Rating:</strong>
+                        <%= review.rating %>
+                    </p>
 
-    <button type="submit">Submit</button>
-</form>
+                    <form action="/reviews/<%= review.id %>?_method=delete" method="post">
+                        <input type="hidden" name="restaurantId" value="<%= restaurant.id %>">
+                        <button type="submit">Delete Review</button>
+                    </form>
+            </div>
+            <% } %>
+    </div>
+
+    <div class="new-review">
+        <h2>Create a New Review</h2>
+        <form action="/reviews/<%= restaurant.id %>/reviews" method="post">
+            <input type="hidden" name="" value="<%= restaurant.id %>">
+            <input type="hidden" name="email">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+
+            <label for="rating">Rating:</label>
+            <input type="number" id="rating" name="rating" min="1" max="5" required>
+
+            <button type="submit">Post</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
 
 
 
