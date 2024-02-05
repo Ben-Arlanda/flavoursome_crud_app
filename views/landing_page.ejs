@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/landing.css">
-    <title>Flavoursome Landing</title>
+    <title>Flavoursome</title>
 </head>
-
 <body>
-<div class="navbar">
-    <a href="/">Home</a>
-    <a href="/restaurants">Restaurants</a>
-    <a href="#reviews">Reviews</a>
-    <a href="#contact">Contact</a>
-</div>
+    <% if (currentUser) { %>
+        <header>
+            <p>Welcome <%= currentUser.email %>
+            </p>
+            <form action="/logout?_method=delete" method="post">
+                <button class="logout">Logout</button>
+            </form>
+        </header>
+        <% } else { %>
+            <p>
+                <a href="/login">login</a>
+            </p>
+            <% } %>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/restaurants">Restaurants</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+    </div>
     <div class="landing-container">
-        <section class="main-photo">
-            <!-- Large main photo goes here -->
-        </section>
-
         <section class="content">
-            <h1>Flavoursome</h1>
+            <h1>Flavoursome!</h1>
             <p>A Culinary Journey Through Sydney's Best Eateries and Reviews</p>
-
             <a href="/restaurants" class="button">View Restaurants</a>
             <a href="/login" class="button">Already a member? LOG IN</a>
         </section>
+        <footer>&copy; 2024 devben. All Rights Reserved.</footer>
     </div>
-
 </body>
-
 </html>

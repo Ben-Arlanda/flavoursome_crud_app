@@ -2,7 +2,8 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background: url('./vintage-old-rustic-cutlery-dark.jpg');
+    background-size: cover;
 }
 
 .navbar {
@@ -12,7 +13,7 @@ body {
 .navbar a {
     float: left;
     display: block;
-    color: #333;
+    color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -28,10 +29,17 @@ main {
     margin: 0 auto;
 }
 
-.header, h1 {
-    color: black;
+.header {
     text-align: center;
+    color: white;
     /* padding: 20px; */
+}
+
+h1 {
+    text-align: center;
+    color: #FBF8BE;
+    font-family: 'Kaushan Script', cursive;
+    font-size: 70px;
 }
 
 

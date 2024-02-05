@@ -3,15 +3,21 @@ require('dotenv').config()
 const express = require('express')
 const bcrypt = require('bcrypt')
 const expressLayouts = require('express-ejs-layouts')
-
-// 
 const methodOverride = require('method-override');
 const app = express()
 const port = 8080
+// const port = process.env.PORT || 3000;
 const db = require('./db')
 
 //need this for user session/userId
 const session = require('express-session')
+const restaurantRouter = require('./controllers/restaurant_router')
+const homeRouter = require('./controllers/home_router')
+const sessionRouter = require('./controllers/session_router')
+const reviewRouter = require('./controllers/review_router')
+
+const setCurrentUser = require('./middlewares/set_current_user')
+const ensureLoggedIn = require('./middlewares/ensure_logged_in')
 
 
 
@@ -31,157 +37,14 @@ app.use(session({
   saveUninitialized: true
 }))
 
-app.get('/', (req, res) => {
-        res.render('landing_page')
-    })
+app.use(setCurrentUser);
+// app.use(ensureLoggedIn);
 
+app.use(restaurantRouter)
+app.use(homeRouter)
+app.use(reviewRouter)
+app.use(sessionRouter)
 
-app.get('/restaurants', (req, res) => {
-      db.query('SELECT * FROM restaurants ORDER BY id ASC;', (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        let restaurant = result.rows
-        res.render('restaurants', { restaurants: restaurant})
-        console.log(result.rows);
-    })
-})
-
-
-app.get('/restaurants/:id', (req, res) => {
-
-    let id = req.params.id
-
-    db.query(`select * from restaurants where id = ${id};`, (err, result) => {
-      
-        console.log(err);
-        let restaurant = result.rows[0]
-
-        db.query('SELECT * FROM reviews WHERE restaurantID = $1;', [id], (err, reviewResult) => {
-
-            let reviews = reviewResult.rows;
-
-            let totalRating = 0;
-            for (const review of reviews) {
-            totalRating += review.rating;
-        }
-          const averageRating = reviews.length > 0 ? totalRating / reviews.length : 0;
-            
-            console.log(result.rows);
-            console.log('hi');
-            
-            res.render('restaurant_info', { restaurant, reviews, averageRating });
-
-        })
-
-    })
-})
-
-
-app.delete('/reviews/:id', (req, res) => {
-
-let restaurantID = req.body.restaurantId
-console.log(restaurantID);
-
-const sql = `
-DELETE FROM reviews
-WHERE id = $1`;
-
-db.query(sql, [req.params.id], (err, result) => {
-    if(err) {
-        console.log(err)
-    }
-
-    res.redirect(`/restaurants/${restaurantID}`);
-    })
-})
-
-app.post('/reviews/:id/reviews', (req, res) => {
-
-  let restaurantID = req.params.id
-  let email = req.body.email
-  let description = req.body.description
-  let rating = req.body.rating
-
-
-  const sql = `INSERT INTO reviews (restaurantID, email, description, rating) values ('${restaurantID}', '${email}', '${description}', '${rating}');`
-
-  db.query(sql, (err, result) => {
-    if (err) {
-      console.log()
-    }
-
-    res.redirect(`/restaurants/${restaurantID}`);
-  })
-
-})
-
-
-
-app.get('/reviews/:id/edit', (req, res) => {
-
-const sql = `
-
-SELECT * FROM reviews
-WHERE id = ${req.params.id};
-`
-
-db.query(sql, (err, result) => {
-  if (err) {
-    console.log(err);
-  }
-
-  let reviews = result.rows[0]
-  res.redirect(`/restaurants/${restaurantID}`);
- })
-})
-
-
-
-app.get('/login', (req, res) => {
-
-  res.render('login')
-})
-
-app.post('/login', (req, res) => {
-console.log(req.body);
-
-const sql = `
-SELECT * FROM users 
-WHERE email = '${req.body.email}';
-`
-
-db.query(sql, (err, result) => {
-  if (err) {
-    console.log(err);
-    res.render('login')
-    return
-  }
-
-if (result.rows.length === 0) {
-  console.log('user not found');
-  res.render('login')
-  return 
-}
-
-const plainTextPass = req.body.password
-const hashedPass = result.rows[0].password_digest
-
-bcrypt.compare(plainTextPass, hashedPass, (err, isCorrect) => {
-
-  if (!isCorrect) {
-    console.log('password does not match');
-    res.render('login')
-    return
-  }
-
-
-  req.session.userId = result.rows[0].id
-  res.redirect('/')
-    
-    })
-  })
-})
 
 
 app.listen(port, () => {

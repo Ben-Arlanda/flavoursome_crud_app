@@ -6,55 +6,47 @@
     <link rel="stylesheet" href="/restaurants.css">
     <title>Document</title>
 </head>
+
 <body>
     <main>
-    <header class="header">
-        <div class="navbar">
-            <a href="/">Home</a>
-            <a href="/restaurants">Restaurants</a>
-            <a href="#reviews">Reviews</a>
-            <a href="#contact">Contact</a>
-        </div>
+        <header class="header">
+            <div class="navbar">
+                <a href="/">Home</a>
+                <a href="/restaurants">Restaurants</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#contact">Contact</a>
+            </div>
         </header>
-        <h1>Flavoursome Restaurants</h1>
-        
-    <div class="container"> 
-    <div class="grid-wrapper">
+        <div class="container">
+            <div class="grid-wrapper">
 
-    <% for (let restaurant of restaurants) { %>
-    
-    
-    <div class="ui-card">
-        
-            <a href="/restaurants/<%= restaurant.id %>">
-                <%= restaurant.name %>
-            </a>
-            <p>
-                <img src="<%= restaurant.image_url1 %>" alt="">
-                <img src="<%= restaurant.image_url2 %>" alt="">
-            </p>
-            <p>
-                <!-- <%= restaurant.description %> -->
-
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-            </p>
-            
-            <p>Location</p>
-            <p>
-                <%= restaurant.location %>
-            </p>
-        
+                <% for (let restaurant of restaurants) { %>
+                    <div class="ui-card">
+                        <a href="/restaurants/<%= restaurant.id %>">
+                            <%= restaurant.name %>
+                        </a>
+                        <p>
+                            <img src="<%= restaurant.image_url1 %>" alt="">
+                            <img src="<%= restaurant.image_url2 %>" alt="">
+                        </p>
+                        <p>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                        </p>
+                        <p>Location</p>
+                        <p>
+                            <%= restaurant.location %>
+                        </p>
+                    </div>
+                    <% } %>
+            </div>
         </div>
-
-        <% } %>
-        </div>
-        </div>
-        </main>
+    </main>
 </body>
+
 </html>
 
 
