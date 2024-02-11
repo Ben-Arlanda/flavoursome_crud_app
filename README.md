@@ -16,7 +16,7 @@ Password: test
 
 ## :page_facing_up: Features 
 
-Users can login for authetication. I used bycrypt to hash the password for added security. 
+Users can login for authentication. I used bycrypt to hash the password for added security. 
 
 ![screenshot](/public/login.png)
 
@@ -60,4 +60,5 @@ JavaScript, Node.js, Postgres, Express, EJS, CSS.
 
 ## :white_check_mark: Future updates
 
-Implement google maps API to show location.
+- Implement google maps API to show location.
+- Implement more responsive design. 

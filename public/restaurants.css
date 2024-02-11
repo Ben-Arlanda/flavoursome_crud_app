@@ -1,3 +1,9 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -82,6 +88,14 @@ h1 {
     font-size: 1.2em;
 }
 
-p {
-    margin: 0;
+@media only screen and (max-width: 600px) {
+
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .grid-wrapper {
+        grid-template-columns: 1fr;
+    }
 }
