@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 const expressLayouts = require('express-ejs-layouts')
 const methodOverride = require('method-override');
 const app = express()
-const port = 8080
+const port = process.env.PORT || 3000;
 // const port = process.env.PORT || 3000;
 const db = require('./db')
 
@@ -32,7 +32,7 @@ app.use(express.urlencoded({ extended: true}))
 
 //need this for user sessiion/userId
 app.use(session({
-  secret: process.env.SECRET,
+  secret: process.env.SECRET || "mistyrose",
   resave: false,
   saveUninitialized: true
 }))
