@@ -3,10 +3,9 @@ require('dotenv').config()
 const express = require('express')
 const bcrypt = require('bcrypt')
 const expressLayouts = require('express-ejs-layouts')
-const methodOverride = require('method-override');
+const methodOverride = require('method-override')
 const app = express()
 const port = process.env.PORT || 3000;
-// const port = process.env.PORT || 3000;
 const db = require('./db')
 
 //need this for user session/userId
