@@ -10,7 +10,7 @@ router.get('/restaurants', ensureLoggedIn, (req, res) => {
             console.log(err);
         }
         let restaurant = result.rows
-        res.render('restaurants', { restaurants: restaurant})
+          res.render('restaurants', { restaurants: restaurant }, { layout: false })
         console.log(result.rows);
     })
 })
@@ -37,7 +37,7 @@ router.get('/restaurants/:id', (req, res) => {
             
             console.log(result.rows);
             
-            res.render('restaurant_info', { restaurant, reviews, averageRating });
+            res.render('restaurant_info', { restaurant, reviews, averageRating }, { layout: false });
 
         })
 

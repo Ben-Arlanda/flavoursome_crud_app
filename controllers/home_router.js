@@ -4,7 +4,7 @@ const db = require('../db')
 
 
 router.get('/', (req, res) => {
-        res.render('landing_page')
+    res.render('landing_page', { layout: false })
     })
 
 
