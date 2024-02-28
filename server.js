@@ -4,8 +4,8 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const methodOverride = require('method-override')
 const app = express()
-// const port = process.env.PORT || 3000;
-const port = 8080
+const port = process.env.PORT || 3000;
+// const port = 8080
 const db = require('./db')
 
 //need this for user session/userId
