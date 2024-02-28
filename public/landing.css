@@ -82,6 +82,11 @@ header {
     background-color: #666;
 }
 
+footer {
+    color: white;
+    font-size: 10px;
+}
+
 @media only screen and (max-width: 600px) {
 
     .content {

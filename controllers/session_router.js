@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 
 router.get('/login', (req, res) => {
 
-  res.render('login', {layout: false})
+  res.render('login')
 })
 
 router.post('/login', (req, res) => {
